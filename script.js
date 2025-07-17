@@ -1,8 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
     const backgroundAudio = document.getElementById('background-audio');
     const screamAudio = document.getElementById('scream-audio');
+    const playAudioButton = document.getElementById('play-audio');
+
     backgroundAudio.volume = 0.3;
     screamAudio.volume = 0.8;
+
+    // Запуск фоновой музыки по клику на кнопку
+    playAudioButton.addEventListener('click', () => {
+        backgroundAudio.play().catch(error => {
+            console.error('Ошибка воспроизведения фоновой музыки:', error);
+        });
+        playAudioButton.textContent = 'Звук включен';
+        playAudioButton.disabled = true;
+    });
 
     const images = document.querySelectorAll('.glitch');
     images.forEach(img => {
@@ -21,13 +32,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 el.style.opacity = '0.2';
                 setTimeout(() => {
                     el.style.opacity = '1';
-                }, 600);
+                }, 500);
             }
         });
-    }, 1800);
+    }, 1500);
 
     const triggerScreamer = (imageUrl) => {
-        screamAudio.play();
+        screamAudio.play().catch(error => {
+            console.error('Ошибка воспроизведения звука скримера:', error);
+        });
         const scare = document.createElement('div');
         scare.style.position = 'fixed';
         scare.style.top = '0';
