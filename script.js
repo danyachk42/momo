@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 500);
             }
         });
-    }, 1200);
+    }, 1500);
 
     const triggerScreamer = (imageUrl) => {
         screamAudio.play();
