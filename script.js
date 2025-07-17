@@ -2,12 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const backgroundAudio = document.getElementById('background-audio');
     const screamAudio = document.getElementById('scream-audio');
     backgroundAudio.volume = 0.3;
-    screamAudio.volume = 0.7;
+    screamAudio.volume = 0.8;
 
     const images = document.querySelectorAll('.glitch');
     images.forEach(img => {
         img.addEventListener('mouseover', () => {
-            img.style.filter = 'brightness(1.6) contrast(2.5)';
+            img.style.filter = 'brightness(1.7) contrast(2.7)';
         });
         img.addEventListener('mouseout', () => {
             img.style.filter = 'none';
@@ -21,10 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 el.style.opacity = '0.2';
                 setTimeout(() => {
                     el.style.opacity = '1';
-                }, 400);
+                }, 500);
             }
         });
-    }, 1000);
+    }, 1200);
 
     const triggerScreamer = (imageUrl) => {
         screamAudio.play();
