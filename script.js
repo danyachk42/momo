@@ -1,11 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const audio = document.getElementById('background-audio');
-    audio.volume = 0.3;
+    const backgroundAudio = document.getElementById('background-audio');
+    const screamAudio = document.getElementById('scream-audio');
+    backgroundAudio.volume = 0.3;
+    screamAudio.volume = 0.7;
 
     const images = document.querySelectorAll('.glitch');
     images.forEach(img => {
         img.addEventListener('mouseover', () => {
-            img.style.filter = 'brightness(1.5) contrast(2.2)';
+            img.style.filter = 'brightness(1.6) contrast(2.5)';
         });
         img.addEventListener('mouseout', () => {
             img.style.filter = 'none';
@@ -15,30 +17,49 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(() => {
         const elements = document.querySelectorAll('h1, h2, p.flicker');
         elements.forEach(el => {
-            if (Math.random() < 0.25) {
-                el.style.opacity = '0.3';
+            if (Math.random() < 0.3) {
+                el.style.opacity = '0.2';
                 setTimeout(() => {
                     el.style.opacity = '1';
-                }, 350);
+                }, 400);
             }
         });
-    }, 1200);
+    }, 1000);
+
+    const triggerScreamer = (imageUrl) => {
+        screamAudio.play();
+        const scare = document.createElement('div');
+        scare.style.position = 'fixed';
+        scare.style.top = '0';
+        scare.style.left = '0';
+        scare.style.width = '100%';
+        scare.style.height = '100%';
+        scare.style.background = `url("${imageUrl}") no-repeat center`;
+        scare.style.backgroundSize = 'cover';
+        scare.style.opacity = '1';
+        scare.style.zIndex = '1000';
+        document.body.appendChild(scare);
+        setTimeout(() => {
+            scare.remove();
+        }, 500);
+    };
 
     setTimeout(() => {
-        if (Math.random() < 0.2) {
-            const scare = document.createElement('div');
-            scare.style.position = 'fixed';
-            scare.style.top = '0';
-            scare.style.left = '0';
-            scare.style.width = '100%';
-            scare.style.height = '100%';
-            scare.style.background = 'url("https://i.ytimg.com/vi/1hXZIpSmgd4/maxresdefault.jpg") no-repeat center';
-            scare.style.backgroundSize = 'cover';
-            scare.style.opacity = '0.95';
-            document.body.appendChild(scare);
-            setTimeout(() => {
-                scare.remove();
-            }, 400);
+        if (Math.random() < 0.25) {
+            triggerScreamer('https://i.ytimg.com/vi/1hXZIpSmgd4/maxresdefault.jpg');
         }
-    }, 10000);
+    }, Math.random() * 7000 + 8000);
+
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            if (Math.random() < 0.15) {
+                e.preventDefault();
+                triggerScreamer('https://img.freepik.com/free-photo/scary-ghostly-creature-dark_23-2150934968.jpg');
+                setTimeout(() => {
+                    window.location.href = link.href;
+                }, 600);
+            }
+        });
+    });
 });
