@@ -21,10 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 el.style.opacity = '0.2';
                 setTimeout(() => {
                     el.style.opacity = '1';
-                }, 500);
+                }, 600);
             }
         });
-    }, 1500);
+    }, 1800);
 
     const triggerScreamer = (imageUrl) => {
         screamAudio.play();
